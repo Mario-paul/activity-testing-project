@@ -28,6 +28,13 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
+    class SettingsFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        }
+    }
+
+    // on toolbar back button press, go back to MainActivity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -38,9 +45,4 @@ class SettingsActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
-        }
-    }
 }
