@@ -22,10 +22,6 @@ class SettingsActivity : AppCompatActivity() {
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        supportActionBar?.addOnMenuVisibilityListener {
-            onBackPressed()
-        }
-
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
@@ -34,15 +30,25 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+//    // on toolbar back button press, go back to MainActivity. ALTERNATIVE WAY THAT ALSO WORKS
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            android.R.id.home -> {
+//                finish()
+//                return true
+//            }
+//        }
+//        return super.onContextItemSelected(item)
+//    }
+
     // on toolbar back button press, go back to MainActivity
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        if (supportFragmentManager.popBackStackImmediate()) { // if user is in a subscreen
+            return true
+        } else { // if user is in main SettingsActivity and not in a subscreen, go back to MainActivity
+            finish()
         }
-        return super.onContextItemSelected(item)
+        return super.onSupportNavigateUp()
     }
 
 }
